@@ -1,0 +1,19 @@
+:root{--bg:#0f1016;--card:#181a24;--line:#272a38;--tx:#eceef5;--mut:#8b90a5;--ok:#35c27a;--warn:#f0a93a;--bad:#ef5b5b;--acc:#6c7bff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+h1{font-size:20px;margin:0}h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 10px}
+.wrap{max-width:1000px;margin:0 auto;padding:18px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}header .sp{flex:1}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:12px}
+.cols{display:grid;grid-template-columns:2fr 1fr;gap:12px}@media(max-width:760px){.cols{grid-template-columns:1fr}}
+.k{font-size:26px;font-weight:700}.kl{color:var(--mut);font-size:12px}
+.pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;border:1px solid var(--line);margin:2px 4px 2px 0;color:var(--mut)}
+.pill.ok{color:var(--ok);border-color:#1f5a3f;background:#13251d}.pill.warn{color:var(--warn);border-color:#5e4719;background:#262014}.pill.bad{color:var(--bad);border-color:#5e2323;background:#271616}
+button,.btn{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:8px 12px;font:inherit;cursor:pointer;text-decoration:none;display:inline-block}
+button.sec,.btn.sec{background:#23263a;color:var(--tx);border:1px solid var(--line)}button:disabled{opacity:.4;cursor:default}
+button.opt{background:#1f2232;border:1px solid var(--line);color:var(--tx);margin:4px 4px 4px 0}button.opt.sel{background:var(--acc);border-color:var(--acc)}
+.tl{list-style:none;padding:0;margin:0;max-height:380px;overflow:auto}.tl li{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}.tl time{color:var(--mut);min-width:44px}
+.bars{display:flex;gap:6px;align-items:flex-end;height:90px;margin-bottom:6px}.bars div{flex:1;background:var(--acc);border-radius:4px 4px 0 0;min-height:3px;position:relative}.bars span{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:10px;color:var(--mut)}
+.dots{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}.dots i{width:14px;height:14px;border-radius:4px;display:inline-block}
+input,select,textarea{background:#11131c;color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit;width:100%}
+label{display:block;margin:10px 0 3px;color:var(--mut);font-size:12px}

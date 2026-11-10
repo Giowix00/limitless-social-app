@@ -4,7 +4,7 @@ export const DEFAULTS = {
   tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
   start: '15:00', end: '19:30', days: [1, 2, 3, 4, 5, 6],
   voiceName: 'Locked In',
-  leaveMin: 2, phoneMin: 5, absentMin: 10, gazeMin: 5, checkinMin: 45, phoneWorkMin: 30, answerSec: 90, cooldownMin: 10,
+  leaveMin: 2, phoneMin: 5, absentMin: 10, gazeMin: 5, checkinMin: 30, postCheckins: true, phoneWorkMin: 30, answerSec: 90, cooldownMin: 10,
   maxPausesPerDay: 3, pauseMin: 10,
   blockSites: true,
   blocklist: ['instagram.com', 'tiktok.com', 'facebook.com', 'x.com', 'twitter.com', 'reddit.com', 'youtube.com/shorts']
@@ -42,6 +42,11 @@ export const MSG = {
     camoff: 'ha la camera spenta da {m} min',
     pause: '⏸ {name} ha messo in pausa il controllo telefono per {m} min (pausa {n} di {max} oggi)',
     test: '✅ Test Locked In: {name} è collegato.',
+    checkin: '✅ {name} {time}: {doing} · produttivo: {prod}',
+    eod: '📊 {name}, fine giornata: {n} check-in, produttivo {pct}%, avvisi {a}. Voto {rating}/5. Da migliorare: {improve}',
+    unblock: '🔓 {name} ha sbloccato {site} per {m} min. Motivo: {reason}',
+    doing: { pc: 'lavoro al PC', phonework: 'telefono per lavoro', study: 'studio su carta', break: 'pausa', distracted: 'distratto' },
+    prod: { yes: 'sì', partly: 'in parte', no: 'no' },
     nudge: 'Torna al lavoro: {what}'
   },
   en: {
@@ -57,6 +62,11 @@ export const MSG = {
     camoff: 'camera off for {m} min',
     pause: '⏸ {name} paused phone detection for {m} min (pause {n} of {max} today)',
     test: '✅ Locked In test: {name} is connected.',
+    checkin: '✅ {name} {time}: {doing} · productive: {prod}',
+    eod: '📊 {name}, end of day: {n} check-ins, productive {pct}%, alerts {a}. Rating {rating}/5. To improve: {improve}',
+    unblock: '🔓 {name} unblocked {site} for {m} min. Reason: {reason}',
+    doing: { pc: 'working on PC', phonework: 'phone for work', study: 'studying on paper', break: 'break', distracted: 'distracted' },
+    prod: { yes: 'yes', partly: 'partly', no: 'no' },
     nudge: 'Back to work: {what}'
   }
 };
