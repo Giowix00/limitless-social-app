@@ -1,0 +1,17 @@
+<!doctype html><meta charset="utf-8"><title>Locked In</title>
+<style>body{font:14px system-ui;max-width:640px;margin:24px auto;padding:0 12px}label{display:block;margin:10px 0 2px;font-weight:600}input,select,textarea{width:100%;padding:6px;box-sizing:border-box}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}button{padding:8px 12px;margin:6px 6px 0 0}#msg{margin-top:10px;white-space:pre-wrap}ol{padding-left:20px}</style>
+<h1>🔒 Locked In</h1>
+<select id="lang"><option value="it">Italiano</option><option value="en">English</option></select>
+<h3 id="t_setup"></h3><ol id="steps"></ol>
+<label id="l_name"></label><input id="name">
+<div class="row"><div><label>Telegram bot token</label><input id="token" type="password"></div><div><label>Telegram chat ID</label><input id="chatId"></div></div>
+<div class="row"><div><label id="l_tz"></label><input id="tz"></div><div><label id="l_voice"></label><input id="voiceName"></div></div>
+<div class="row"><div><label id="l_start"></label><input id="start" type="time"></div><div><label id="l_end"></label><input id="end" type="time"></div></div>
+<label id="l_days"></label><input id="days" placeholder="1,2,3,4,5,6">
+<div class="row"><div><label id="l_phone"></label><input id="phoneMin" type="number"></div><div><label id="l_absent"></label><input id="absentMin" type="number"></div></div>
+<div class="row"><div><label id="l_nohands"></label><input id="noHandsMin" type="number"></div><div><label id="l_leave"></label><input id="leaveMin" type="number"></div></div>
+<label id="l_block"></label><textarea id="blocklist" rows="4"></textarea>
+<label><input id="blockSites" type="checkbox" style="width:auto"> <span id="l_blockon"></span></label>
+<label><input id="forceActive" type="checkbox" style="width:auto"> <span id="l_force"></span></label>
+<button id="cam"></button><button id="test"></button><button id="save"></button>
+<div id="msg"></div><script type="module" src="options.js"></script>
