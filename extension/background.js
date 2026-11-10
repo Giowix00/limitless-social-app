@@ -5,6 +5,7 @@ const mem = { presence: null, vision: null, since: {}, lastTrue: {}, lastAlert: 
 chrome.runtime.onInstalled.addListener((d) => {
   if (d.reason === 'install') chrome.runtime.openOptionsPage();
 });
+chrome.storage.onChanged.addListener((c) => { if (c.cfg) { mem.blocking = null; evaluate(); } });
 chrome.alarms.create('tick', { periodInMinutes: 0.5 });
 chrome.alarms.onAlarm.addListener(() => evaluate());
 
