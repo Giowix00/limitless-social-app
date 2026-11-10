@@ -1,4 +1,4 @@
-import { FilesetResolver, FaceDetector, HandLandmarker, ObjectDetector } from './vendor/vision_bundle.mjs';
+import { FilesetResolver, FaceLandmarker, HandLandmarker, ObjectDetector } from './vendor/vision_bundle.mjs';
 
 const url = (p) => chrome.runtime.getURL(p);
 const send = (m) => chrome.runtime.sendMessage(m).catch(() => {});
@@ -6,7 +6,7 @@ const send = (m) => chrome.runtime.sendMessage(m).catch(() => {});
 try {
   const fileset = await FilesetResolver.forVisionTasks(url('vendor/wasm'));
   const opts = (f) => ({ baseOptions: { modelAssetPath: url('vendor/models/' + f), delegate: 'CPU' }, runningMode: 'IMAGE' });
-  const face = await FaceDetector.createFromOptions(fileset, { ...opts('blaze_face_short_range.tflite'), minDetectionConfidence: 0.5 });
+  const face = await FaceLandmarker.createFromOptions(fileset, { ...opts('face_landmarker.task'), numFaces: 1, outputFaceBlendshapes: true, outputFacialTransformationMatrixes: true });
   const hands = await HandLandmarker.createFromOptions(fileset, { ...opts('hand_landmarker.task'), numHands: 2 });
   const obj = await ObjectDetector.createFromOptions(fileset, { ...opts('efficientdet_lite0.tflite'), scoreThreshold: 0.35, categoryAllowlist: ['cell phone'] });
 
@@ -19,7 +19,16 @@ try {
     try {
       const W = video.videoWidth, H = video.videoHeight;
       if (!W) return;
-      const f = face.detect(video).detections.length > 0;
+      const fr = face.detect(video);
+      const f = fr.faceLandmarks.length > 0;
+      let eyeDown = null, pitch = null;
+      if (f) {
+        const cats = fr.faceBlendshapes?.[0]?.categories || [];
+        const g = (n) => cats.find((c) => c.categoryName === n)?.score ?? 0;
+        eyeDown = (g('eyeLookDownLeft') + g('eyeLookDownRight')) / 2;
+        const m = fr.facialTransformationMatrixes?.[0]?.data;
+        if (m) pitch = (Math.atan2(m[6], m[10]) * 180) / Math.PI;
+      }
       const hl = hands.detect(video).landmarks;
       const handBoxes = hl.map((pts) => {
         const xs = pts.map((p) => p.x), ys = pts.map((p) => p.y);
@@ -32,7 +41,7 @@ try {
         return { x1: b.originX / W, y1: b.originY / H, x2: (b.originX + b.width) / W, y2: (b.originY + b.height) / H };
       });
       const phoneHeld = phones.some((p) => handBoxes.some((h) => overlap(p, h)));
-      send({ type: 'vision', face: f, hands: hl.length, phoneSeen: phones.length > 0, phoneHeld });
+      send({ type: 'vision', face: f, eyeDown, pitch, hands: hl.length, phoneSeen: phones.length > 0, phoneHeld });
     } catch (e) { send({ type: 'visionError', error: String(e) }); }
   }, 1500);
 } catch (e) {

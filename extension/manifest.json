@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Locked In",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Focus accountability for the First Line team (Discord + camera + Telegram alerts).",
   "permissions": ["storage", "alarms", "offscreen", "declarativeNetRequest", "notifications", "tabs"],
   "host_permissions": ["https://discord.com/*", "https://api.telegram.org/*", "<all_urls>"],
